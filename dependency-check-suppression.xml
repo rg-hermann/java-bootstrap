@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.2.0.xsd">
+    <!-- Example: Suppress known false positives
+    <suppress>
+        <notes><![CDATA[
+        This is a test dependency and the vulnerability is not exploitable in this context
+        ]]></notes>
+        <gav regex="false">org.springframework.boot:spring-boot:.*</gav>
+        <cve>CVE-2021-12345</cve>
+    </suppress>
+    -->
+</suppressions>
