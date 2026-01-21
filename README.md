@@ -1,12 +1,15 @@
 # Java Bootstrap Template ☕
 
-[![CI/CD](https://github.com/yourorg/java-bootstrap/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/yourorg/java-bootstrap/actions)
-[![Coverage](https://codecov.io/gh/yourorg/java-bootstrap/branch/main/graph/badge.svg)](https://codecov.io/gh/yourorg/java-bootstrap)
+[![CI/CD](https://github.com/rg-hermann/java-bootstrap/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/rg-hermann/java-bootstrap/actions)
+[![CodeQL](https://github.com/rg-hermann/java-bootstrap/workflows/CodeQL%20Analysis/badge.svg)](https://github.com/rg-hermann/java-bootstrap/security/code-scanning)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-blue)](https://dependabot.com/)
+[![Coverage](https://codecov.io/gh/rg-hermann/java-bootstrap/branch/main/graph/badge.svg)](https://codecov.io/gh/rg-hermann/java-bootstrap)
 [![Java Version](https://img.shields.io/badge/java-21-blue.svg)](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.0-green.svg)](https://spring.io/projects/spring-boot)
+[![Docker](https://img.shields.io/badge/Docker-Multi--Stage-2496ED.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Professional Java 21 project template with enterprise-grade security, testing, and DevOps automation.
+Professional Java 21 project template com **Enterprise-Grade Security**, DevOps Automation e Quality Gates.
 
 ## 🏗️ Architecture
 
@@ -38,7 +41,6 @@ src/
 | **Dependency-Check** | OWASP CVE scan | ✓ Fails build (CVSS ≥ 7) |
 
 ## 🚀 Quick Start
-
 ```bash
 # Clone & build
 git clone <repo>
@@ -51,6 +53,11 @@ mvn spring-boot:run
 # Docker build
 mvn clean package -Pdocker
 docker run -p 8080:8080 java-bootstrap:1.0.0-SNAPSHOT
+
+# Health checks (Kubernetes-ready)
+curl http://localhost:8080/api/health
+curl http://localhost:8080/actuator/health/liveness
+curl http://localhost:8080/actuator/health/readiness
 ```
 
 ## 📝 Git Workflow
@@ -69,8 +76,12 @@ git commit -m "chore(deps): upgrade Spring Boot to 3.4.1"
 
 - Environment secrets in `.env` (git-ignored)
 - OWASP Dependency Check on every build
+- CodeQL static analysis (automated)
+- Dependabot security updates
 - Alpine JRE for minimal image surface
 - MaxRAMPercentage tuning for containers
+- Spring Security & Actuator health checks
+- Kubernetes-ready health probes (liveness/readiness)
 
 ## ✅ Pre-commit Checklist
 
@@ -79,6 +90,14 @@ git commit -m "chore(deps): upgrade Spring Boot to 3.4.1"
 - [ ] Code style: `mvn checkstyle:check`
 - [ ] No bugs: `mvn spotbugs:check`
 - [ ] No vulnerabilities: `mvn org.owasp:dependency-check-maven:check`
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- Development setup
+- Git workflow (Conventional Commits)
+- PR process
+- Bug reporting
 
 ## 📚 Documentation
 
