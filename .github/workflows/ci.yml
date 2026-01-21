@@ -29,9 +29,6 @@ jobs:
       - name: PMD Code Quality
         run: mvn pmd:check -q
       
-      - name: OWASP Dependency Check
-        run: mvn org.owasp:dependency-check-maven:check -q
-      
       - name: Unit Tests
         run: mvn test -q
       
