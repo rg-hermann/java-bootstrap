@@ -38,6 +38,9 @@ jobs:
       - name: Code Coverage Report
         run: mvn jacoco:report -q
       
+      - name: SonarQube Scan
+        run: mvn sonar:sonar -Dsonar.projectKey=java-bootstrap -q || echo "SonarQube skipped"
+      
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
