@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM maven:3.9.6-eclipse-temurin-21 AS builder
+FROM maven:3.9.11-eclipse-temurin-25 AS builder
 WORKDIR /build
 COPY pom.xml .
 RUN --mount=type=cache,target=/root/.m2 mvn dependency:resolve
