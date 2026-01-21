@@ -1,0 +1,105 @@
+name: "Copilot Review & Auto-Merge"
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  copilot-review:
+    name: Copilot Code Review
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.event_name == 'pull_request'
+    
+    steps:
+      - name: Ask Copilot to review
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              reviewers: ['github-actions'],
+              team_reviewers: []
+            });
+            
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '👀 Copilot reviewing this PR...'
+            });
+
+  auto-merge-on-success:
+    name: Auto-Merge on Success
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.event_name == 'pull_request_review'
+    
+    steps:
+      - name: Check CI status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            
+            console.log('PR Status:', pr.data.state);
+            console.log('Mergeable:', pr.data.mergeable);
+            
+            // Get latest commit status
+            const commits = await github.rest.pulls.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            
+            const lastCommit = commits.data[commits.data.length - 1];
+            const statuses = await github.rest.repos.getCombinedStatusForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: lastCommit.commit.sha
+            });
+            
+            console.log('Status:', statuses.data.state);
+            
+            if (statuses.data.state === 'success' && pr.data.mergeable) {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                merge_method: 'squash'
+              });
+              
+              github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '✅ All checks passed! Auto-merging with squash...'
+              });
+            }
+
+  enable-auto-merge:
+    name: Enable Auto-Merge
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    
+    steps:
+      - name: Enable auto-merge for Dependabot PRs
+        run: |
+          gh pr merge --squash --auto "$PR_NUMBER"
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
