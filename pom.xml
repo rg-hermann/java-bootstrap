@@ -17,17 +17,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <spring-boot.version>4.0.1</spring-boot.version>
+        <spring-boot.version>3.4.0</spring-boot.version>
         <junit.version>5.11.3</junit.version>
         <mockito.version>5.7.0</mockito.version>
         <assertj.version>3.25.1</assertj.version>
         <testcontainers.version>1.19.7</testcontainers.version>
-        <lombok.version>1.18.42</lombok.version>
-        <mapstruct.version>1.6.3</mapstruct.version>
+        <lombok.version>1.18.30</lombok.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <checkstyle.version>10.13.0</checkstyle.version>
         <spotbugs.version>4.8.3</spotbugs.version>
         <pmd.version>6.55.0</pmd.version>
         <jacoco.version>0.8.11</jacoco.version>
+        <dependency-check.version>8.4.2</dependency-check.version>
     </properties>
 
     <dependencyManagement>
@@ -80,19 +81,12 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test-autoconfigure</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
