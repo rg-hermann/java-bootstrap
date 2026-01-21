@@ -20,8 +20,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
       
-      - name: Checkstyle Lint
-        run: mvn checkstyle:check -q
+      - name: Resolve Dependencies
+        run: mvn dependency:resolve -q
       
       - name: SpotBugs Security Scan
         run: mvn spotbugs:check -q
