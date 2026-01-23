@@ -1,4 +1,5 @@
 FROM maven:3.9.6-eclipse-temurin-21 AS builder
+LABEL org.opencontainers.image.source = "https://github.com/rg-hermann/java-bootstrap"
 WORKDIR /build
 COPY pom.xml .
 RUN --mount=type=cache,target=/root/.m2 mvn dependency:resolve
