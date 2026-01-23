@@ -80,7 +80,7 @@ jobs:
       - name: Update Infra Repository (GitOps)
         if: github.ref == 'refs/heads/main'
         env:
-          INFRA_REPO: "rg-hermann/$repo_name-infra"
+          INFRA_REPO: rg-hermann/java-bootstrap-infra
           PAT_TOKEN: ${{ secrets.PAT_INFRA }}
         run: |
           git config --global user.email "github-actions@github.com"
