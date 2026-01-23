@@ -23,7 +23,7 @@
         <assertj.version>3.25.1</assertj.version>
         <testcontainers.version>1.19.7</testcontainers.version>
         <lombok.version>1.18.30</lombok.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
         <checkstyle.version>10.13.0</checkstyle.version>
         <spotbugs.version>4.8.3</spotbugs.version>
         <pmd.version>6.55.0</pmd.version>
