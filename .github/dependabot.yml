@@ -5,11 +5,7 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-      day: "monday"
-      time: "03:00"
     open-pull-requests-limit: 5
-    reviewers:
-      - "rg-hermann"
     labels:
       - "dependencies"
       - "maven"
@@ -17,20 +13,14 @@ updates:
       prefix: "chore(deps):"
       prefix-development: "chore(deps-dev):"
       include: "scope"
-    auto-merge: true
 
   # Docker
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "monthly"
-      day: "monday"
-      time: "04:00"
-    reviewers:
-      - "rg-hermann"
     labels:
       - "dependencies"
       - "docker"
     commit-message:
       prefix: "chore(docker):"
-    auto-merge: true
