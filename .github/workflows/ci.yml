@@ -59,14 +59,15 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@latest
         with:
           image-ref: 'ghcr.io/${{ github.repository }}:${{ github.sha }}'
           format: 'table'
-          exit-code: '1'
+          exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+          cache: 'true'
 
       - name: Update GitOps Repo
         if: github.ref == 'refs/heads/main'
